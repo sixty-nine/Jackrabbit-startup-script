@@ -13,7 +13,9 @@
 ### YOU HAVE TO EDIT THESE VALUES !!!
 BASEDIR=/home/dev/jackalope/jackrabbit
 #JACKRABBIT=$BASEDIR/jackrabbit-standalone-2.2.6-SNAPSHOT.jar
-JACKRABBIT=$BASEDIR/jackrabbit-standalone-2.2.8-jackalope-SNAPSHOT.jar
+JACKRABBIT_JAR=$BASEDIR/jackrabbit-standalone-2.2.8-jackalope-SNAPSHOT.jar
+JACKRABBIT_HOST=127.0.0.1
+JACKRABBIT_PORT=8080
 ### 
 
 
@@ -25,7 +27,7 @@ LOGFILE=$BASEDIR/jackrabbit.log
 do_start() {
 	if [ ! -f $PIDFILE ]; then
 		cd $BASEDIR
-		nohup java -jar $JACKRABBIT >> $LOGFILE 2>&1 & echo $! > $PIDFILE
+		nohup java -jar $JACKRABBIT_JAR -h $JACKRABBIT_HOST -p $JACKRABBIT_PORT >> $LOGFILE 2>&1 & echo $! > $PIDFILE
 		echo "Jackrabbit started"
 	else
 		echo "Jackrabbit is already running"
