@@ -11,13 +11,23 @@
 
 
 ### YOU HAVE TO EDIT THESE VALUES !!!
-BASEDIR=/home/dev/jackalope/jackrabbit
-#JACKRABBIT=$BASEDIR/jackrabbit-standalone-2.2.6-SNAPSHOT.jar
-JACKRABBIT_JAR=$BASEDIR/jackrabbit-standalone-2.2.8-jackalope-SNAPSHOT.jar
+BASEDIR=/Users/bastianwidmer/Downloads/jackhase
+JACKRABBIT_JAR=$BASEDIR/jackrabbit-standalone-2.3.2.jar
 JACKRABBIT_HOST=127.0.0.1
 JACKRABBIT_PORT=8080
-### 
+JMX_PORT=1111
 
+### MEMORY ALLOCATION
+MEMORY="-XX:MaxPermSize=128m \
+        -Xmx512M"
+
+### JMX Management Parameters
+MANAGEMENT="-Dcom.sun.management.jmxremote  \
+            -Dcom.sun.management.jmxremote.port=$JMX_PORT \
+            -Dcom.sun.management.jmxremote.authenticate=true \
+            -Dcom.sun.management.jmxremote.ssl=false \
+            -Dcom.sun.management.jmxremote.password.file=$BASEDIR/jmx.user \
+            -Dcom.sun.management.jmxremote.access.file=$BASEDIR/jmx.role"
 
 PIDFILE=$BASEDIR/jackrabbit.pid
 LOGFILE=$BASEDIR/jackrabbit.log
@@ -27,7 +37,7 @@ LOGFILE=$BASEDIR/jackrabbit.log
 do_start() {
 	if [ ! -f $PIDFILE ]; then
 		cd $BASEDIR
-		nohup java -jar $JACKRABBIT_JAR -h $JACKRABBIT_HOST -p $JACKRABBIT_PORT >> $LOGFILE 2>&1 & echo $! > $PIDFILE
+		nohup java $MEMORY $MANAGEMENT -jar $JACKRABBIT_JAR -h $JACKRABBIT_HOST -p $JACKRABBIT_PORT >> $LOGFILE 2>&1 & echo $! > $PIDFILE
 		echo "Jackrabbit started"
 	else
 		echo "Jackrabbit is already running"
