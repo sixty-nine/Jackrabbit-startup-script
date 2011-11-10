@@ -19,7 +19,9 @@ JMX_PORT=1111
 
 ### MEMORY ALLOCATION
 MEMORY="-XX:MaxPermSize=128m \
-        -Xmx512M"
+        -Xmx512M \
+        -Xms128M"
+
 
 ### JMX Management Parameters
 MANAGEMENT="-Dcom.sun.management.jmxremote  \
