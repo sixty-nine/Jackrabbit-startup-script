@@ -21,29 +21,42 @@
 
 
 ### PLEASE EDIT THESE VALUES FOR YOUR SETUP
-# directory in which jackrabbit will store local data, must be writeable
+# Directory in which jackrabbit will store local data, must be writeable
 BASEDIR=/home/dev/jackalope/jackrabbit
-# full filename of jackrabbit standalone .jar to run
-JACKRABBIT_JAR=$BASEDIR/jackrabbit-standalone-2.2.8-jackalope-SNAPSHOT.jar
-# ip address for jackrabbit to listen on. you can make jackrabbit listen on all
+# Full filename of jackrabbit standalone .jar to run
+JACKRABBIT_JAR=$BASEDIR/jackrabbit-standalone-2.3.2.jar
+# IP address for jackrabbit to listen on. you can make jackrabbit listen on all
 # interfaces by using 0.0.0.0 here.
 JACKRABBIT_HOST=127.0.0.1
-# port number to listen on. 8080 is default, you can use something else
+# Port number to listen on. 8080 is default, you can use something else
 JACKRABBIT_PORT=8080
-###
-
-# full filename to the pid file to check if jackrabbit is running
+# JMX-Port for monitoring
+JMX_PORT=1111
+# Java memory allocation
+MEMORY="-XX:MaxPermSize=128m \
+        -Xmx512M \
+        -Xms128M"
+# JMX Management Parameters
+MANAGEMENT="-Dcom.sun.management.jmxremote  \
+            -Dcom.sun.management.jmxremote.port=$JMX_PORT \
+            -Dcom.sun.management.jmxremote.authenticate=true \
+            -Dcom.sun.management.jmxremote.ssl=false \
+            -Dcom.sun.management.jmxremote.password.file=$BASEDIR/jmx.user \
+            -Dcom.sun.management.jmxremote.access.file=$BASEDIR/jmx.role"
+# Full filename to the pid file to check if jackrabbit is running
 PIDFILE=$BASEDIR/jackrabbit.pid
-# full filename to the logfile to output console output of jackrabbit
+# Full filename to the logfile to output console output of jackrabbit
 # additionally, jackrabbit has its own logfile
 LOGFILE=$BASEDIR/jackrabbit.log
+###
 
+# Uncomment to debug the script
 #set -x
 
 do_start() {
     if [ ! -f $PIDFILE ]; then
         cd $BASEDIR
-        nohup java -jar $JACKRABBIT_JAR -h $JACKRABBIT_HOST -p $JACKRABBIT_PORT >> $LOGFILE 2>&1 & echo $! > $PIDFILE
+		nohup java $MEMORY $MANAGEMENT -jar $JACKRABBIT_JAR -h $JACKRABBIT_HOST -p $JACKRABBIT_PORT >> $LOGFILE 2>&1 & echo $! > $PIDFILE
         echo "Jackrabbit started"
     else
         echo "Jackrabbit is already running"
@@ -83,4 +96,3 @@ case "$1" in
         exit 3
     ;;
 esac
-
