@@ -51,7 +51,7 @@ JMX Monitoring
 ==============
 The default JMX-Port for monitoring is set to 1111.
 You have to copy the jmx.user.template and jmx.group.template to the directory where your
-Jackrabbit JAR file is stored and remove the .template suffix
+jackrabbit.sh script is stored and remove the .template suffix
 
 In the User file you should specify a different password for your admin user.
 
