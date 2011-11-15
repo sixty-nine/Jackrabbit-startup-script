@@ -1,3 +1,5 @@
 jackrabbit-standalone*.jar
 jackrabbit/
+jmx.role
+jmx.user
 
