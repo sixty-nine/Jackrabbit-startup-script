@@ -17,6 +17,7 @@
 # Required-Stop:
 #
 # Author:           Daniel Barsotti <daniel.barsotti@liip.ch>
+#                   Bastian Widmer <bastian.widmer@liip.ch>
 ### END INIT INFO
 
 
