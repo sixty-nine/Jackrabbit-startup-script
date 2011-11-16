@@ -1,5 +1,7 @@
 jackrabbit-standalone*.jar
 jackrabbit/
+jackrabbit.log
+jackrabbit.pid
 jmx.role
 jmx.user
 
