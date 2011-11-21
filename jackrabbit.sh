@@ -77,6 +77,7 @@ do_stop() {
     else
         echo "Jackrabbit is not running"
     fi
+    exit 3
 }
 
 do_status() {
@@ -84,6 +85,7 @@ do_status() {
           echo "Jackrabbit is running [ pid = " $(cat $PIDFILE) "]"
     else
         echo "Jackrabbit is not running"
+        exit 3
     fi
 }
 
