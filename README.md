@@ -17,7 +17,8 @@ Installation
     cd /opt/jackrabbit-startup
     git clone https://github.com/sixty-nine/Jackrabbit-startup-script.git
     # Configure the script
-    ## <edit jackrabbit.sh to configure some settings> ##
+    mv defaults /etc/default/jackrabbit
+    ## <edit /etc/default/jackrabbit to configure some settings> ##
     # Create JMX config files
     cp jmx.role.template jmx.role
     cp jmx.user.template jmx.user
