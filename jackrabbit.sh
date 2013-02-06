@@ -62,7 +62,7 @@ do_start() {
         cd $BASEDIR
 		    nohup java $MEMORY $MANAGEMENT -jar $JACKRABBIT_JAR -h $JACKRABBIT_HOST -p $JACKRABBIT_PORT >> $LOGFILE 2>&1 & echo $! > $PIDFILE
         # Wait until the server is ready (from an idea of Christoph Luehr)
-        while [[ -z `curl -s "http://$JACKRABBIT_HOST:$JACKRABBIT_PORT"` ]] ; do sleep 1s; echo -n "."; done
+        while [ -z "`curl -s "http://$JACKRABBIT_HOST:$JACKRABBIT_PORT"`" ] ; do sleep 1s; echo -n "."; done
         echo "Jackrabbit started"
     else
         echo "Jackrabbit is already running"
