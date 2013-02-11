@@ -58,6 +58,13 @@ LOGFILE=$BASEDIR/jackrabbit.log
 #set -x
 
 do_start() {
+    for REQ_FILE in $JMX_DIR/jmx.user $JMX_DIR/jmx.role ; do
+        if [ ! -f $REQ_FILE ]; then
+            echo "Required file not found: $REQ_FILE"
+            exit 3
+        fi
+    done
+
     if [ ! -f $PIDFILE ]; then
         cd $BASEDIR
         nohup java $MEMORY $MANAGEMENT -jar $JACKRABBIT_JAR -h $JACKRABBIT_HOST -p $JACKRABBIT_PORT >> $LOGFILE 2>&1 & echo $! > $PIDFILE
