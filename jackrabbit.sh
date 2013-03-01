@@ -59,6 +59,7 @@ LOGFILE=$BASEDIR/jackrabbit.log
 
 do_start() {
     if [ ! -f $PIDFILE ]; then
+        echo "Starting Jackrabbit"
         cd $BASEDIR
         nohup java $MEMORY $MANAGEMENT -jar $JACKRABBIT_JAR -h $JACKRABBIT_HOST -p $JACKRABBIT_PORT >> $LOGFILE 2>&1 & echo $! > $PIDFILE
         # Wait until the server is ready (from an idea of Christoph Luehr)
