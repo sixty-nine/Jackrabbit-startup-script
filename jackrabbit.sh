@@ -20,39 +20,7 @@
 #                    Bastian Widmer <bastian.widmer@liip.ch>
 ### END INIT INFO
 
-
-### PLEASE EDIT THESE VALUES FOR YOUR SETUP
-# Directory in which jackrabbit will store local data, must be writeable
-BASEDIR=/home/dev/Jackrabbit-startup-script/jackrabbit
-# Full filename of jackrabbit standalone .jar to run
-JACKRABBIT_JAR=$BASEDIR/jackrabbit-standalone-2.3.1-jackalope-SNAPSHOT.jar
-# IP address for jackrabbit to listen on. you can make jackrabbit listen on all
-# interfaces by using 0.0.0.0 here.
-JACKRABBIT_HOST=127.0.0.1
-# Port number to listen on. 8080 is default, you can use something else
-JACKRABBIT_PORT=8080
-# JMX-Port for monitoring
-JMX_PORT=1111
-# Directory of the JMX configuration files (jmx.user & jmx.role). It defaults to
-# the script directory
-JMX_DIR=$PWD
-# Java memory allocation
-MEMORY="-XX:MaxPermSize=128m \
-        -Xmx512M \
-        -Xms128M"
-# JMX Management Parameters
-MANAGEMENT="-Dcom.sun.management.jmxremote  \
-            -Dcom.sun.management.jmxremote.port=$JMX_PORT \
-            -Dcom.sun.management.jmxremote.authenticate=true \
-            -Dcom.sun.management.jmxremote.ssl=false \
-            -Dcom.sun.management.jmxremote.password.file=$JMX_DIR/jmx.user \
-            -Dcom.sun.management.jmxremote.access.file=$JMX_DIR/jmx.role"
-# Full filename to the pid file to check if jackrabbit is running
-PIDFILE=$BASEDIR/jackrabbit.pid
-# Full filename to the logfile to output console output of jackrabbit
-# additionally, jackrabbit has its own logfile
-LOGFILE=$BASEDIR/jackrabbit.log
-###
+test -f /etc/default/jackrabbit && . /etc/default/jackrabbit
 
 # Uncomment to debug the script
 #set -x
